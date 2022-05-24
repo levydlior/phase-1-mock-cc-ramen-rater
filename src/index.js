@@ -23,18 +23,25 @@ function renderRamenrsToPage(ramen) {
   ramenImg.src = ramen.image;
   ramenImg.alt = ramenName;
   ramenImg.id = ramenId;
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  const ramenDivImg = document.createElement('div')
 
-    if(ramenId === 1){
-        setRamenDetailsSectionToCurrentRamen(
-            ramenImg,
-            ramenName,
-            ramenResturant,
-            ramenComment,
-            ramenRating,
-            ramen
-          )
-    }
+  if (ramenId === 1) {
+    setRamenDetailsSectionToCurrentRamen(
+      ramenImg,
+      ramenName,
+      ramenResturant,
+      ramenComment,
+      ramenRating,
+      ramen
+    );
+  }
 
+
+  deleteButton.addEventListener('click', e => {
+      e.target.parentNode.remove()
+  })
 
   showRamenDetails(
     ramenImg,
@@ -45,7 +52,8 @@ function renderRamenrsToPage(ramen) {
     ramen
   );
 
-  ramenMenu.append(ramenImg);
+  ramenDivImg.append(deleteButton, ramenImg)
+  ramenMenu.append(ramenDivImg);
 }
 
 newRamenForm.addEventListener("submit", (e) => {
@@ -120,5 +128,3 @@ function setRamenDetailsSectionToCurrentRamen(
   spanRatin.textContent = ramenRating;
   detailsIMg.src = ramen.image;
 }
-
-
