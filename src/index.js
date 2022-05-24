@@ -4,6 +4,7 @@ const ramenURL = "http://localhost:3000/ramens";
 const ramenMenu = document.querySelector("#ramen-menu");
 const ramenDetails = document.querySelector("#ramen-detail");
 const newRamenForm = document.querySelector("#new-ramen");
+const editForm = document.querySelector("#edit-ramen");
 
 fetch(ramenURL)
   .then((response) => response.json())
@@ -25,6 +26,8 @@ function renderRamenrsToPage(ramen) {
   ramenImg.id = ramenId;
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
+  const editButton = document.createElement('button')
+  editButton.textContent = "Edit"
   const ramenDivImg = document.createElement("div");
 
   if (ramenId === 1) {
@@ -48,7 +51,29 @@ function renderRamenrsToPage(ramen) {
     ramen
   );
 
-  ramenDivImg.append(deleteButton, ramenImg);
+
+  editButton.addEventListener('click', () =>{
+      const editRatingTab = document.querySelector('#edit-rating') 
+      const editCommetTab = document.querySelector('#edit-comment') 
+      const commentDisplay = document.querySelector('#comment-display')
+      const ratingDisplay = document.querySelector('#rating-display')
+
+      editCommetTab.value = ramenComment
+      editRatingTab.value = ramenRating
+
+      editForm.addEventListener('submit', e => {
+          e.preventDefault()
+          commentDisplay.textContent = editCommetTab.value
+          ratingDisplay.textContent = editRatingTab.value
+
+      })
+
+  })
+
+
+
+
+  ramenDivImg.append(editButton , deleteButton, ramenImg);
   ramenMenu.append(ramenDivImg);
 }
 
