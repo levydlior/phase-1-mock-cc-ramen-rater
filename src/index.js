@@ -22,21 +22,28 @@ function renderRamenrsToPage(ramen) {
   const ramenId = ramen.id;
   ramenImg.src = ramen.image;
   ramenImg.alt = ramenName;
-  ramenImg.id =  ramenId
+  ramenImg.id = ramenId;
 
-  ramenImg.addEventListener("click", () => {
-    const h2 = document.querySelector("#ramen-name");
-    const h3 = document.querySelector("#resturant-name");
-    const pComment = document.querySelector("#comment-display");
-    const spanRatin = document.querySelector("#rating-display");
-    const detailsIMg = document.querySelector("#detailsImage");
+    if(ramenId === 1){
+        setRamenDetailsSectionToCurrentRamen(
+            ramenImg,
+            ramenName,
+            ramenResturant,
+            ramenComment,
+            ramenRating,
+            ramen
+          )
+    }
 
-    h2.textContent = ramenName;
-    h3.textContent = ramenResturant;
-    pComment.textContent = ramenComment;
-    spanRatin.textContent = ramenRating;
-    detailsIMg.src = ramen.image;
-  });
+
+  showRamenDetails(
+    ramenImg,
+    ramenName,
+    ramenResturant,
+    ramenComment,
+    ramenRating,
+    ramen
+  );
 
   ramenMenu.append(ramenImg);
 }
@@ -72,3 +79,46 @@ newRamenForm.addEventListener("submit", (e) => {
       renderRamenrsToPage(updatedRamens);
     });
 });
+
+function showRamenDetails(
+  ramenImg,
+  ramenName,
+  ramenResturant,
+  ramenComment,
+  ramenRating,
+  ramen
+) {
+  ramenImg.addEventListener("click", () => {
+    setRamenDetailsSectionToCurrentRamen(
+      ramenImg,
+      ramenName,
+      ramenResturant,
+      ramenComment,
+      ramenRating,
+      ramen
+    );
+  });
+}
+
+function setRamenDetailsSectionToCurrentRamen(
+  ramenImg,
+  ramenName,
+  ramenResturant,
+  ramenComment,
+  ramenRating,
+  ramen
+) {
+  const h2 = document.querySelector("#ramen-name");
+  const h3 = document.querySelector("#resturant-name");
+  const pComment = document.querySelector("#comment-display");
+  const spanRatin = document.querySelector("#rating-display");
+  const detailsIMg = document.querySelector("#detailsImage");
+
+  h2.textContent = ramenName;
+  h3.textContent = ramenResturant;
+  pComment.textContent = ramenComment;
+  spanRatin.textContent = ramenRating;
+  detailsIMg.src = ramen.image;
+}
+
+
